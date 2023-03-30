@@ -1,4 +1,4 @@
-package Projeto_Integrador_IIIA;
+package projeto;
 
 public class Author {
     private String name;

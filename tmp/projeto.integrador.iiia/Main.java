@@ -1,21 +1,25 @@
 package Projeto_Integrador_IIIA;
 
+import java.util.List;
 import java.util.Scanner;
+import Projeto_Integrador_IIIA.Menu;
+
 
 class Main {
     public static void main(String[] args) {
+        Menu menu = new Menu();
+
+        menu.showMainMenu();
+
+
         // Instanciando um objeto Scanner para input de dados
-        Scanner input = new Scanner(System.in);
+        
         // Instanciando um objeto de Lista de Livros
-        BookList bookList = new BookList();
-        int option;
+        // BookList bookList = new BookList();
+        // int option;
+
         // Menu Inicial do programa chamando as funções conforme a escolha
         do {
-
-            System.out.println(
-                    "Bem-vindo à biblioteca virtual!!!\n\nEscolha a funcionalidade desejada:\n\n1-Cadastrar Livro"
-                            + "\n2-Consultar de títulos de Livros\n3-Consultar por autor(a)\n4-Remover Livro\n5-Sair ");
-            option = input.nextInt();
             // Caso a opção seja 5, o programa será encerrado
             if (option == 5)
                 break;
@@ -84,69 +88,68 @@ class Main {
                 System.out.println("\nOpção inválida! Tente novamente...");
 
         } while (option != 5);
-
     }
 
-    public static Book RegisterBook() {
-        // Alimentando os dados para registro do Livro
-        String title, isbn, editora;
-        int yearPublication;
+    // public static Book RegisterBook() {
+    //     // Alimentando os dados para registro do Livro
+    //     String title, isbn, editora;
+    //     int yearPublication;
 
-        Scanner input = new Scanner(System.in);
+    //     Scanner input = new Scanner(System.in);
 
-        System.out.println("\nInsira o Título do livro:");
-        title = input.nextLine();
+    //     System.out.println("\nInsira o Título do livro:");
+    //     title = input.nextLine();
 
-        System.out.println("\nInsira o isbn do livro:");
-        isbn = input.nextLine();
+    //     System.out.println("\nInsira o isbn do livro:");
+    //     isbn = input.nextLine();
 
-        System.out.println("\nInsira a editora do livro:");
-        editora = input.nextLine();
+    //     System.out.println("\nInsira a editora do livro:");
+    //     editora = input.nextLine();
 
-        System.out.println("\nInsira o ano de publicação do livro:");
-        yearPublication = input.nextInt();
-        // Instanciando um novo Livro enviando os atributos através do construtor
-        Book book = new Book(title, isbn, editora, yearPublication);
-        // Chamando o método para registrar o Autor e addicionar ao Livro
-        book.addAuthor(RegisterAuthor());
-        // Laço para caso o Livro possua mais de 1 autor
-        // adicionando no seu atributo de Array de Autores
-        int chose;
-        do {
-            System.out.println(
-                    "\nDeseja registrar mais um Autor para este Livro?\nDigite 1 para SIM\nDigite 2 para NÃO: ");
-            chose = input.nextInt();
-            if (chose == 2)
-                break;
-            else if (chose == 1)
-                book.addAuthor(RegisterAuthor());
-            else {
-                System.out.println("\nOpção inválida, tente novamente...");
-            }
+    //     System.out.println("\nInsira o ano de publicação do livro:");
+    //     yearPublication = input.nextInt();
+    //     // Instanciando um novo Livro enviando os atributos através do construtor
+    //     Book book = new Book(title, isbn, editora, yearPublication);
+    //     // Chamando o método para registrar o Autor e addicionar ao Livro
+    //     book.addAuthor(RegisterAuthor());
+    //     // Laço para caso o Livro possua mais de 1 autor
+    //     // adicionando no seu atributo de Array de Autores
+    //     int chose;
+    //     do {
+    //         System.out.println(
+    //                 "\nDeseja registrar mais um Autor para este Livro?\nDigite 1 para SIM\nDigite 2 para NÃO: ");
+    //         chose = input.nextInt();
+    //         if (chose == 2)
+    //             break;
+    //         else if (chose == 1)
+    //             book.addAuthor(RegisterAuthor());
+    //         else {
+    //             System.out.println("\nOpção inválida, tente novamente...");
+    //         }
 
-        } while (chose != 2);
+    //     } while (chose != 2);
 
-        System.out.println("\nLivro registrado com sucesso!\nDigite 's' para prosseguir...");
-        input.next();
-        return book;
-    }
+    //     System.out.println("\nLivro registrado com sucesso!\nDigite 's' para prosseguir...");
+    //     input.next();
+    //     return book;
+    // }
 
-    private static Author RegisterAuthor() {
-        Scanner input = new Scanner(System.in);
+    // private static Author RegisterAuthor() {
+    //     Scanner input = new Scanner(System.in);
 
-        String nameAuthor, contryAuthor;
+    //     String nameAuthor, contryAuthor;
 
-        System.out.println("\nInsira o nome do Autor do livro:");
-        nameAuthor = input.nextLine();
+    //     System.out.println("\nInsira o nome do Autor do livro:");
+    //     nameAuthor = input.nextLine();
 
-        System.out.println("\nInsira o país de origem do Autor:");
-        contryAuthor = input.nextLine();
-        // Instanciando o Objeto Autor passando os seus atributos atravéso do Construtor
-        Author author = new Author(nameAuthor, contryAuthor);
-        System.out.println("\nAutor registrado!");
-        return author;
-    }
+    //     System.out.println("\nInsira o país de origem do Autor:");
+    //     contryAuthor = input.nextLine();
+    //     // Instanciando o Objeto Autor passando os seus atributos atravéso do Construtor
+    //     Author author = new Author(nameAuthor, contryAuthor);
+    //     System.out.println("\nAutor registrado!");
+    //     return author;
+    // }
 
-    private static void ConsultAuthor() {
-    }
+    // private static void ConsultAuthor() {
+    // }
 }

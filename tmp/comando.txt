@@ -1,0 +1,2 @@
+cd src
+rm *.class; javac -encoding utf8 projeto/*.java; java projeto.Main

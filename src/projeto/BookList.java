@@ -1,4 +1,4 @@
-package Projeto_Integrador_IIIA;
+package projeto;
 
 import java.util.Scanner;
 
@@ -146,40 +146,93 @@ public class BookList {
             input.next();
             return;
         }
-
-        Node current = head;
-        // Book book = current.book;
-        int compare;
-
-        if (current.next == null) {
-            System.out.println("Titulo:" + ((Book) current.book).getTitle());
+        if (head == tail) {
+            printBooks();
             return;
+
         } else {
+            // Book book = current.book;
+            Node current = head;
+            Node currentBook = head;
+            int compare;
+            // enquanto atual não for nulo
             while (current != null) {
-                if (current.next != null) {
+
+                while (current.next != null) {
                     compare = (((Book) current.book).getTitle())
                             .compareToIgnoreCase(((Book) current.next.book).getTitle());
 
                     if (compare < 0) {
-                        System.out.println("Titulo:" + ((Book) current.book).getTitle());
-
-                    } else if (compare > 0) {
-                        System.out.println("Titulo:" + ((Book) current.next.book).getTitle());
-                        // o livro na segunda posição da lista passa para a anteriar da cabeça
-                        head.previous = head.next;
-                        // O livro na cabeça passar para a segunda posição da lista
-                        head.next = head;
-                        // O livro que estava na posição antes da cabeça se torna a cabeça
-                        head = head.previous;
-                        // O nó anterior a cabeça aponta para nulo
+                        head.previous = currentBook;
+                        currentBook.next = head;
+                        head = currentBook;
                         head.previous = null;
                     }
+                    // else if (compare > 0 && current.next == tail) {
+                    // aux = current;
+                    // current = current.next;
+                    // tail = aux;
+                    // }
                 }
                 current = current.next;
             }
             setListPosition();
             printBooks();
         }
+    }
+
+    public void getYearTittle(int year1, int year2) {
+        Node current = head;
+        if (head == null) {
+            System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");
+            input.next();
+            return;
+        }
+        System.out.println("Titulos publicados entre " + year1 + "á" + year2);
+        while (current != null) {
+            if (((Book) current.book).getYear() >= year1 && ((Book) current.book).getYear() <= year2) {
+                System.out.println(current.book.getTitle());
+            }
+            current = current.next;
+        }
+        System.out.println("\nDigite's' para prosseguir...");
+        input.next();
+    }
+
+    public void getWordTitle(String word) {
+        if (head == null) {
+            System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");
+            input.next();
+            return;
+        }
+
+        Node current = head;
+        while (current != null) {
+            if ((current.book).getTitle().contains(word))
+                System.out.print(current.book + "");
+
+            current = current.next;
+        }
+        System.out.println("Digite 's' para prosseguir...");
+        input.next();
+    }
+
+    public void getAuthorBook(String author) {
+        if (head == null) {
+            System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");
+            input.next();
+            return;
+        }
+        Node current = head;
+
+        while (current != null) {
+            if ((current.book).getTitle() == author)
+                System.out.println((current.book).getTitle());
+
+            current = current.next;
+        }
+        System.out.println("Digite 's' para");
+        input.next();
     }
 
     // Imprimi todos os nós/Objetos da lista duplamente encadeada
