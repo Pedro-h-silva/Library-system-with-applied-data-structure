@@ -1,5 +1,8 @@
 package projeto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class BookList {
@@ -140,45 +143,38 @@ public class BookList {
     }
 
     // Ordenar por ordem alfabetica
-    public void sortBookList() {
+    public void sortByTitle() {
         if (head == null) {
             System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");
             input.next();
             return;
         }
-        if (head == tail) {
-            printBooks();
-            return;
 
-        } else {
-            // Book book = current.book;
-            Node current = head;
-            Node currentBook = head;
-            int compare;
-            // enquanto atual não for nulo
-            while (current != null) {
-
-                while (current.next != null) {
-                    compare = (((Book) current.book).getTitle())
-                            .compareToIgnoreCase(((Book) current.next.book).getTitle());
-
-                    if (compare < 0) {
-                        head.previous = currentBook;
-                        currentBook.next = head;
-                        head = currentBook;
-                        head.previous = null;
-                    }
-                    // else if (compare > 0 && current.next == tail) {
-                    // aux = current;
-                    // current = current.next;
-                    // tail = aux;
-                    // }
-                }
-                current = current.next;
-            }
-            setListPosition();
-            printBooks();
+        // Cria uma lista temporária com todos os livros
+        ArrayList<Book> tempList = new ArrayList<Book>();
+        Node current = head;
+        while (current != null) {
+            tempList.add(current.book);
+            current = current.next;
         }
+
+        // Ordena a lista temporária de livros pelo título
+        Collections.sort(tempList, new Comparator<Book>() {
+            @Override
+            public int compare(Book b1, Book b2) {
+                return b1.getTitle().compareToIgnoreCase(b2.getTitle());
+            }
+        });
+
+        // Volta os livros ordenados para a lista, e imprime a listar ordenada
+        current = head;
+        System.out.println("\nLivros em ordem alfabética:");
+        for (Book b : tempList) {
+            current.book = b;
+            current = current.next;
+        }
+        setListPosition();
+        printBooks();
     }
 
     public void getYearTittle(int year1, int year2) {

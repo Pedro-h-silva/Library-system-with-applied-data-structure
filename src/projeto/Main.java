@@ -67,7 +67,7 @@ class Main {
                             }
                             // consultar titulos por ordem alfabetica
                             case 2:
-                                bookList.sortBookList();
+                                bookList.sortByTitle();
                                 break;
                             // conulta por palavra
                             case 3: {
