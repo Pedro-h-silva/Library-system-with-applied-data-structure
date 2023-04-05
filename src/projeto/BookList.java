@@ -138,8 +138,8 @@ public class BookList {
     public boolean checkList() {
         if (head == null) {
             return false;
-        }
-        return true;
+        } else
+            return true;
     }
 
     // Ordenar por ordem alfabetica
@@ -166,24 +166,26 @@ public class BookList {
             }
         });
 
-        // Volta os livros ordenados para a lista, e imprime a listar ordenada
+        // Volta os livros ordenados para a lista, e imprime a lista ordenada
         current = head;
         System.out.println("\nLivros em ordem alfabética:");
         for (Book b : tempList) {
             current.book = b;
             current = current.next;
         }
+        tempList.clear();
         setListPosition();
         printBooks();
     }
 
+    // Listando livros de acordo com o intervalo de ano de publicação solicitados
     public void getYearTittle(int year1, int year2) {
-        Node current = head;
         if (head == null) {
             System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");
             input.next();
             return;
         }
+        Node current = head;
         System.out.println("Titulos publicados entre " + year1 + "á" + year2);
         while (current != null) {
             if (((Book) current.book).getYear() >= year1 && ((Book) current.book).getYear() <= year2) {
@@ -195,6 +197,7 @@ public class BookList {
         input.next();
     }
 
+    // Imprimindo livros de acordo com palavra ou frase
     public void getWordTitle(String word) {
         if (head == null) {
             System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");
@@ -213,6 +216,7 @@ public class BookList {
         input.next();
     }
 
+    // Imprimindo titulos publicados pelo autor escolhido
     public void getAuthorBook(String author) {
         if (head == null) {
             System.out.println("\nA lista está vazia.\nDigite's' para prosseguir...");

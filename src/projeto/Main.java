@@ -12,17 +12,14 @@ class Main {
         // Menu Inicial do programa chamando as funções conforme a escolha
         int option;
         do {
-            System.out.println(
-                    "Bem-vindo à biblioteca virtual!!!\n\nEscolha a funcionalidade desejada:\n\n1-Cadastrar Livro"
-                            + "\n2-Consultar de títulos de Livros\n3-Consultar por autor(a)\n4-Remover Livro\n5-Sair ");
+            ShowMenu.showInitialMenu();
             option = input.nextInt();
             switch (option) {
                 // Opção 1 abre um mini menu para registro de novos livros
                 case 1: {
                     int option2;
                     do {
-                        System.out.println("\nDeseja cadastrar um Livro em qual posição da lista?"
-                                + "\n1.Início\n2.Final\n3.Voltar ao Menu Principal");
+                        ShowMenu.registerBookMenu();
                         option2 = input.nextInt();
                         switch (option2) {
                             case 1:
@@ -32,23 +29,20 @@ class Main {
                                 bookList.addBookAtEnd(RegisterBook());
                                 break;
                             case 3:
-                                System.out.println("Voltando ao Menu Principal...");
+                                ShowMenu.backMainMenuMessage();
                                 break;
                             default:
-                                System.out.println("\nOpção inválida! Tente novamente...");
+                                ShowMenu.invalidOptionMessage();
                                 break;
                         }
                     } while (option2 != 3);
                     break;
                 }
-                // 2 fará a consulta dos Livros de acordo com a escolha
+                // Opção 2 fará a consulta dos Livros de acordo com a escolha
                 case 2: {
                     int option3;
                     do {
-                        System.out.println("\nEscolha uma opção de consulta:\n\n1.Consultar Livro por posição na Lista"
-                                + "\n2.Consultar títulos em ordem alfabética\n3.Consultar títulos palavras"
-                                +
-                                "\n4.Consultar Livros por ano de publicação\n5.Retornar ao Menu Principal\n");
+                        ShowMenu.consultBookMenu();
                         option3 = input.nextInt();
                         switch (option3) {
                             case 1: {
@@ -69,7 +63,7 @@ class Main {
                             case 2:
                                 bookList.sortByTitle();
                                 break;
-                            // conulta por palavra
+                            // consulta por palavra
                             case 3: {
                                 input = new Scanner(System.in);
                                 System.out.println("Digite uma frase ou palavra:");
@@ -77,10 +71,10 @@ class Main {
                                 bookList.getWordTitle(word);
                                 break;
                             }
+                            // consulta por intervalo de ano de publicação
                             case 4: {
                                 System.out.println("Digite um ano inicial para pesquisa:");
                                 int year1 = input.nextInt();
-
                                 System.out.println("Digite o ano final:");
                                 int year2 = input.nextInt();
 
@@ -88,17 +82,17 @@ class Main {
                                 break;
                             }
                             case 5:
-                                System.out.println("Voltando ao Menu Principal...");
+                                ShowMenu.backMainMenuMessage();
                                 break;
 
                             default:
-                                System.out.println("\nOpção inválida! Tente novamente...");
+                                ShowMenu.invalidOptionMessage();
                                 break;
                         }
                     } while (option3 != 5);
                     break;
                 }
-
+                // Opção 3 consulta livros publicados pelo Autor escolhido
                 case 3: {
                     input = new Scanner(System.in);
                     System.out.println("Digite o nome de um Autor:");
@@ -106,7 +100,7 @@ class Main {
                     bookList.getAuthorBook(author);
                     break;
                 }
-                // 4 Fará remoção do último livro da lista
+                // Opção 4 Fará remoção do último livro da lista
                 case 4: {
                     System.out.println(
                             "\nLivro removido do final da Lista:\n" + bookList.removeBookAtEnd()
@@ -118,9 +112,9 @@ class Main {
                 case 5:
                     System.out.println("Encerrando o programa...");
                     break;
-                // Caso seja selecionado qualquer outra tecla, irá solicitar para repetir
+                // Caso seja selecionado qualquer outra tecla, informará para tentar novamente
                 default:
-                    System.out.println("\nOpção inválida! Tente novamente...");
+                    ShowMenu.invalidOptionMessage();
                     break;
             }
 
@@ -145,8 +139,8 @@ class Main {
         Book book = new Book(title, isbn, editora, yearPublication);
         // Chamando o método para registrar o Autor e addicionar ao Livro
         book.addAuthor(RegisterAuthor());
-        // Laço para caso o Livro possua mais de 1 autor
-        // adicionando no seu atributo de Array de Autores
+        // Laço para caso o Livro possua mais de 1 autor, adicionando no seu atributo de
+        // Array de Autores
         int chose;
         do {
             System.out.println(
@@ -157,7 +151,7 @@ class Main {
             else if (chose == 1)
                 book.addAuthor(RegisterAuthor());
             else {
-                System.out.println("\nOpção inválida, tente novamente...");
+                ShowMenu.invalidOptionMessage();
             }
 
         } while (chose != 2);
