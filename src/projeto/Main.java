@@ -1,5 +1,6 @@
 package projeto;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Main {
@@ -20,14 +21,24 @@ class Main {
                     int option2;
                     do {
                         ShowMenu.registerBookMenu();
-                        option2 = input.nextInt();
-                        switch (option2) {
+
+                        switch (option2 = input.nextInt()) {
                             case 1:
-                                bookList.addBookAtTop(RegisterBook());
-                                break;
+                                try {
+                                    bookList.addBookAtTop(RegisterBook());
+                                    break;
+                                } catch (NullPointerException exc) {
+                                    System.out.println("Não foi possível cadastrar o Livro, tente novamente...\n");
+                                    break;
+                                }
                             case 2:
-                                bookList.addBookAtEnd(RegisterBook());
-                                break;
+                                try {
+                                    bookList.addBookAtEnd(RegisterBook());
+                                    break;
+                                } catch (NullPointerException exc) {
+                                    System.out.println("Não foi possível cadastrar o Livro, tente novamente...\n");
+                                    break;
+                                }
                             case 3:
                                 ShowMenu.backMainMenuMessage();
                                 break;
@@ -43,21 +54,19 @@ class Main {
                     int option3;
                     do {
                         ShowMenu.consultBookMenu();
-                        option3 = input.nextInt();
-                        switch (option3) {
+                        switch (option3 = input.nextInt()) {
                             case 1: {
-                                if (bookList.checkList() == false) {
-                                    System.out.println("Nenhum Livro cadastrado até o momento!");
+                                try {
+                                    System.out.println("Digite a posição do livro que deseja consultar:\n");
+                                    System.out.println(bookList.getBook(input.nextInt())
+                                            + "\nDigite 's' para continuar...");
+                                    input.next();
                                     break;
 
-                                } else {
-                                    int position;
-                                    System.out.println("Digite a posição do livro que deseja consultar:\n");
-                                    position = input.nextInt();
-                                    System.out.println(bookList.getBook(position) + "\nDigite 's' para continuar...");
-                                    input.next();
+                                } catch (NullPointerException exc) {
+                                    System.out.println("Nenhum livro consta no cadastro.");
+                                    break;
                                 }
-                                break;
                             }
                             // consultar titulos por ordem alfabetica
                             case 2:
@@ -73,13 +82,21 @@ class Main {
                             }
                             // consulta por intervalo de ano de publicação
                             case 4: {
-                                System.out.println("Digite um ano inicial para pesquisa:");
-                                int year1 = input.nextInt();
-                                System.out.println("Digite o ano final:");
-                                int year2 = input.nextInt();
+                                try {
+                                    System.out.println("Digite um ano inicial para pesquisa:");
+                                    int year1 = input.nextInt();
+                                    System.out.println("Digite o ano final:");
+                                    int year2 = input.nextInt();
 
-                                bookList.getYearTittle(year1, year2);
-                                break;
+                                    bookList.getYearTittle(year1, year2);
+                                    break;
+
+                                } catch (InputMismatchException exc) {
+                                    System.out
+                                            .print("Você deve inserir um número inteiro para o ano do livro, tente novamente...");
+                                    input.nextLine();
+                                    break;
+                                }
                             }
                             case 5:
                                 ShowMenu.backMainMenuMessage();
@@ -102,11 +119,17 @@ class Main {
                 }
                 // Opção 4 Fará remoção do último livro da lista
                 case 4: {
-                    System.out.println(
-                            "\nLivro removido do final da Lista:\n" + bookList.removeBookAtEnd()
-                                    + "\nDigite 's' para prosseguir...");
-                    input.next();
-                    break;
+                    try {
+                        System.out.println(
+                                "\nLivro removido do final da Lista:\n" + bookList.removeBookAtEnd()
+                                        + "\nDigite 's' para prosseguir...");
+                        input.next();
+                        break;
+                    } catch (NullPointerException exc) {
+                        System.out.println("Nenhum livro consta no cadastro." +
+                                "\nVoltando ao menu principal...\n");
+                        break;
+                    }
                 }
                 // Caso a opção seja 5, o programa será encerrado
                 case 5:
@@ -123,45 +146,55 @@ class Main {
     }
 
     public static Book RegisterBook() {
-        input = new Scanner(System.in);
-        System.out.println("Insira o Título do livro:");
-        String title = input.nextLine();
+        try {
+            input = new Scanner(System.in);
+            System.out.println("Insira o Título do livro:");
+            String title = input.nextLine();
 
-        System.out.println("\nInsira o isbn do livro:");
-        String isbn = input.nextLine();
+            System.out.println("\nInsira o isbn do livro:");
+            String isbn = input.nextLine();
 
-        System.out.println("\nInsira a editora do livro:");
-        String editora = input.nextLine();
+            System.out.println("\nInsira a editora do livro:");
+            String editora = input.nextLine();
 
-        System.out.println("\nInsira o ano de publicação do livro:");
-        int yearPublication = input.nextInt();
-        // Instanciando um novo Livro enviando os atributos através do construtor
-        Book book = new Book(title, isbn, editora, yearPublication);
-        // Chamando o método para registrar o Autor e addicionar ao Livro
-        book.addAuthor(RegisterAuthor());
-        // Laço para caso o Livro possua mais de 1 autor, adicionando no seu atributo de
-        // Array de Autores
-        int chose;
-        do {
-            System.out.println(
-                    "\nDeseja registrar mais um Autor para este Livro?\nDigite 1 para SIM\nDigite 2 para NÃO: ");
-            chose = input.nextInt();
-            if (chose == 2)
-                break;
-            else if (chose == 1)
-                book.addAuthor(RegisterAuthor());
-            else {
-                ShowMenu.invalidOptionMessage();
-            }
+            System.out.println("\nInsira o ano de publicação do livro:");
+            int yearPublication = input.nextInt();
 
-        } while (chose != 2);
+            // Instanciando um novo Livro enviando os atributos através do construtor
+            Book book = new Book(title, isbn, editora, yearPublication);
+            // Chamando o método para registrar o Autor e addicionar ao Livro
+            book.addAuthor(RegisterAuthor());
 
-        System.out.println("\nLivro registrado com sucesso!\nDigite 's' para prosseguir...");
-        input.next();
-        return book;
+            // Laço para caso o Livro possua mais de 1 autor, adicionando no seu atributo de
+            // Array de Autores
+            int chose;
+            do {
+                System.out.println(
+                        "\nDeseja registrar mais um Autor para este Livro?\nDigite 1 para SIM\nDigite 2 para NÃO: ");
+                chose = input.nextInt();
+                if (chose == 2)
+                    break;
+                else if (chose == 1)
+                    book.addAuthor(RegisterAuthor());
+                else {
+                    ShowMenu.invalidOptionMessage();
+                }
+
+            } while (chose != 2);
+
+            System.out.println("\nLivro registrado com sucesso!\nDigite 's' para prosseguir...");
+            input.next();
+            return book;
+
+        } catch (Exception exc) {
+            System.out.println("Dado inserido inválido...");
+            input.nextLine();
+            return null;
+        }
     }
 
     private static Author RegisterAuthor() {
+
         input = new Scanner(System.in);
         System.out.println("\nInsira o nome do Autor do livro:");
         String nameAuthor = input.nextLine();

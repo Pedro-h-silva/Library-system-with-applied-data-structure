@@ -1,11 +1,11 @@
 package projeto;
 
-public interface ShowMenu {
+public class ShowMenu {
     public static void showInitialMenu() {
         System.out.println(
                 "Bem-vindo à biblioteca virtual!!!" +
                         "\n\nEscolha a funcionalidade desejada:\n" +
-                        "\n1-Cadastrar Livro" + "\n2-Consultar de títulos de Livros" +
+                        "\n1-Cadastrar Livro" + "\n2-Consultar de Livros" +
                         "\n3-Consultar por autor(a)" +
                         "\n4-Remover Livro\n5-Sair ");
     }
@@ -21,7 +21,7 @@ public interface ShowMenu {
         System.out.println("\nEscolha uma opção de consulta:\n" +
                 "\n1.Consultar Livro por posição na Lista" +
                 "\n2.Consultar títulos em ordem alfabética" +
-                "\n3.Consultar títulos palavras" +
+                "\n3.Consultar títulos por palavras" +
                 "\n4.Consultar Livros por ano de publicação" +
                 "\n5.Retornar ao Menu Principal\n");
     }
