@@ -105,6 +105,30 @@ public class BookList {
         return removedBook;
     }
 
+    // Remove um livro do início da lista
+    public Book removeBookAtTop() {
+        Node current = head;
+        Book removedBook = current.book;
+        // Verifica se a lista esá vazia
+        if (head == null) {
+            System.out.println("\nA lista está vazia.\nDigite 's' para prosseguir...");
+            input.next();
+
+        } else {
+            // Remove o objeto Livro que está no início da Lista
+            current.book = null;
+            // cabeça-> próxima se torna nova cabeça
+            head = head.next;
+            // ponto anterior da cabeça para nulo
+            head.previous = null;
+            // Diminui o contador do tamanho da Lista
+            this.sizeList--;
+            // }
+        }
+        setListPosition();
+        return removedBook;
+    }
+
     // Define posições de cada objeto do início ao fim
     public void setListPosition() {
         Node currentPosition = head;
@@ -269,6 +293,7 @@ public class BookList {
         input.next();
     }
 
+    // Verificando se já existe um livro igual ao que está sendo instanciado
     public boolean chekEqualsBooks(Book book) {
         Node current = head;
         while (current != null) {
@@ -278,5 +303,4 @@ public class BookList {
         }
         return false;
     }
-
 }

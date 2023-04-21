@@ -30,6 +30,7 @@ class Main {
 
                                 } catch (NullPointerException exc) {
                                     System.out.println("Não foi possível cadastrar o Livro, tente novamente...\n");
+                                    bookList.removeBookAtTop();
                                     break;
                                 }
                             case 2:
@@ -39,6 +40,7 @@ class Main {
 
                                 } catch (NullPointerException exc) {
                                     System.out.println("Não foi possível cadastrar o Livro, tente novamente...\n");
+                                    bookList.removeBookAtEnd();
                                     break;
                                 }
 
@@ -201,8 +203,12 @@ class Main {
                 return book;
             }
 
-        } catch (Exception exc) {
-            System.out.println("Dado inserido inválido...");
+        } catch (InputMismatchException exc) {
+            System.out.println("O ano do livro deve ser um número inteiro...");
+            input.nextLine();
+            return null;
+
+        } catch (NullPointerException exc) {
             input.nextLine();
             return null;
         }
