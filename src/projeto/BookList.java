@@ -112,7 +112,7 @@ public class BookList {
         // Percorre a lista do início ao fim adicionando as posições
         while (currentPosition != null) {
             position++;
-            ((Book) currentPosition.book).setPosition(position);
+            (currentPosition.book).setPosition(position);
             currentPosition = currentPosition.next;
         }
     }
@@ -121,18 +121,20 @@ public class BookList {
     public Book getBook(int position) {
         Node current = head;
         Book book = current.book;
+        boolean findBook = false;
 
         while (current != null) {
             if (current.book.getPosition() == position) {
                 book = current.book;
+                findBook = true;
                 return book;
-
-            } else if (current == tail && current.book.getPosition() != position) {
-                System.out.print("Nenhum livro encontrado nesta posição, o resultado é: ");
-                break;
             }
+
             current = current.next;
         }
+        if (!findBook)
+            System.out.println("Não foi encontrado livro a posição inserida.");
+
         return null;
     }
 
@@ -180,16 +182,18 @@ public class BookList {
             return;
         }
         Node current = head;
+        boolean findYearTittle = false;
         System.out.println("Titulos publicados entre " + year1 + " á " + year2);
         while (current != null) {
-            if ((current.book).getYear() >= year1 && (current.book).getYear() <= year2)
+            if ((current.book).getYear() >= year1 && (current.book).getYear() <= year2) {
                 System.out.println(current.book.getTitle());
-
-            else if (current == tail && (current.book).getYear() != year1)
-                System.out.println("Nenhum livro encontrado com o ano inserido.");
-
+                findYearTittle = true;
+            }
             current = current.next;
         }
+        if (!findYearTittle)
+            System.out.println("Não consta nenhum livro na lista com os anos informados.");
+
         System.out.println("\nDigite's' para prosseguir...");
         input.next();
     }
@@ -203,15 +207,17 @@ public class BookList {
         }
 
         Node current = head;
+        boolean findWordTittle = false;
         while (current != null) {
-            if ((current.book).getTitle().toLowerCase().contains(word.toLowerCase()))
+            if ((current.book).getTitle().toLowerCase().contains(word.toLowerCase())) {
                 System.out.print(current.book + "");
-
-            if (current == tail && !(current.book).getTitle().toLowerCase().contains(word.toLowerCase()))
-                System.out.println("Palavra não encontrada!");
-
+                findWordTittle = true;
+            }
             current = current.next;
         }
+        if (!findWordTittle)
+            System.out.println("Não foi encontrado nenhum livro com esta palavra.");
+
         System.out.println("\nDigite 's' para prosseguir...");
         input.next();
     }
@@ -224,17 +230,23 @@ public class BookList {
             return;
         }
         Node current = head;
-
+        boolean findAuthor = false;
         while (current != null) {
-            if ((current.book).getTitle() == author)
-                System.out.println((current.book).getTitle());
 
-            if (current == tail && (current.book).getTitle() != author)
-                System.out.println("Não foi encontrado livros para o autor inserido.");
+            for (int i = 0; i < (current.book).getAuthor().size(); i++) {
+
+                if ((current.book).getAuthor().get(i).getName().toLowerCase().equals(author.toLowerCase())) {
+                    System.out.println("Titulo: " + (current.book).getTitle());
+                    findAuthor = true;
+                }
+            }
 
             current = current.next;
         }
-        System.out.println("Digite 's' para");
+        if (!findAuthor)
+            System.out.println("Não foi encontrado livros para o autor inserido.");
+
+        System.out.println("\nDigite 's' para sair");
         input.next();
     }
 
@@ -256,4 +268,15 @@ public class BookList {
         System.out.println("\nDigite 's' para prosseguir...");
         input.next();
     }
+
+    public boolean chekEqualsBooks(Book book) {
+        Node current = head;
+        while (current != null) {
+            if (current.book.equals(book))
+                return true;
+            current = current.next;
+        }
+        return false;
+    }
+
 }

@@ -29,6 +29,10 @@ public class Book {
         this.author.add(author);
     }
 
+    public ArrayList<Author> getAuthor() {
+        return author;
+    }
+
     public String getEditora() {
         return editora;
     }
@@ -43,6 +47,28 @@ public class Book {
 
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Book other = (Book) obj;
+        if (title == null) {
+            if (other.title != null)
+                return false;
+        } else if (!title.equals(other.title))
+            return false;
+        if (isbn == null) {
+            if (other.isbn != null)
+                return false;
+        } else if (!isbn.equals(other.isbn))
+            return false;
+        return true;
     }
 
     @Override
