@@ -207,7 +207,7 @@ public class BookList {
         }
         Node current = head;
         boolean findYearTittle = false;
-        System.out.println("Titulos publicados entre " + year1 + " á " + year2);
+        System.out.println("\nTitulos publicados entre " + year1 + " á " + year2 + ":");
         while (current != null) {
             if ((current.book).getYear() >= year1 && (current.book).getYear() <= year2) {
                 System.out.println(current.book.getTitle());
@@ -256,7 +256,6 @@ public class BookList {
         Node current = head;
         boolean findAuthor = false;
         while (current != null) {
-
             for (int i = 0; i < (current.book).getAuthor().size(); i++) {
 
                 if ((current.book).getAuthor().get(i).getName().toLowerCase().equals(author.toLowerCase())) {
@@ -264,7 +263,6 @@ public class BookList {
                     findAuthor = true;
                 }
             }
-
             current = current.next;
         }
         if (!findAuthor)
@@ -293,7 +291,8 @@ public class BookList {
         input.next();
     }
 
-    // Verificando se já existe um livro igual ao que está sendo instanciado
+    // Verificando se já existe um livro igual na lista ao que está sendo
+    // instanciado
     public boolean chekEqualsBooks(Book book) {
         Node current = head;
         while (current != null) {

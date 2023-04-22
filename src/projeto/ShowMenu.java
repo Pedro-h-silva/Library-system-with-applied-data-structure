@@ -3,8 +3,8 @@ package projeto;
 public class ShowMenu {
     public static void showInitialMenu() {
         System.out.println(
-                "Bem-vindo à biblioteca virtual!!!" +
-                        "\n\nEscolha a funcionalidade desejada:\n" +
+                "\nBem-vindo à biblioteca virtual!!!" +
+                        "\nEscolha a funcionalidade desejada:\n" +
                         "\n1-Cadastrar Livro" + "\n2-Consultar de Livros" +
                         "\n3-Consultar por autor(a)" +
                         "\n4-Remover Livro\n5-Sair ");
@@ -27,7 +27,7 @@ public class ShowMenu {
     }
 
     public static void backMainMenuMessage() {
-        System.out.println("Voltando ao Menu Principal...");
+        System.out.println("\nVoltando ao Menu Principal...");
     }
 
     public static void invalidOptionMessage() {
