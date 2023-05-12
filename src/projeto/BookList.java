@@ -21,30 +21,21 @@ public class BookList {
         }
     }
 
-    // Inicialmente, cabeça(head) e tail(cauda) são definidos como nulos
     Node head, tail = null;
 
     // adicionar um Objeto Livro no inicio da lista
     public void addBookAtTop(Object book) {
-        // Criar um novo nó
         Node newBook = new Node(book);
-        // Acrescenta o tamanho da Lista de Livros
         this.sizeList++;
-        // se a lista estiver vazia, cabeça e cauda apontam para novo Nodo(newNode)
+
         if (head == null) {
             head = tail = newBook;
-            // o anterior da cabeça será nulo
             head.previous = null;
-            // o próximo da cauda será nulo
             tail.next = null;
         } else {
-            // adiciona newBook ao inicio da lista. tail->próximo definido para newNode
             head.previous = newBook;
-            // newBook->proximo definido como cabeça
             newBook.next = head;
-            // newBook->proximo torna-se a nova cabeça
             head = newBook;
-            // ponto anterior da cabeça para nulo
             head.previous = null;
         }
         setListPosition();
@@ -52,25 +43,17 @@ public class BookList {
 
     // adicionar um Objeto Livro no final da lista
     public void addBookAtEnd(Object book) {
-        // Criar um novo nó
         Node newBook = new Node(book);
-        // Acrescenta o tamanho da Lista de Livros
         this.sizeList++;
-        // se a lista estiver vazia, cabeça e cauda apontam para novo Nodo(newBook)
+
         if (head == null) {
             head = tail = newBook;
-            // o anterior da cabeça será nulo
             head.previous = null;
-            // o próximo da cauda será nulo
             tail.next = null;
         } else {
-            // adiciona newBook ao final da lista. tail->próximo definido para newNode
             tail.next = newBook;
-            // newBook->anterior definido como cauda
             newBook.previous = tail;
-            // newBook torna-se uma nova cauda
             tail = newBook;
-            // próximo ponto da cauda para nulo
             tail.next = null;
         }
         setListPosition();
@@ -81,24 +64,18 @@ public class BookList {
         Node current = tail;
         Book removedBook = current.book;
 
-        // Verifica se a lista esá vazia
         if (head == null) {
             System.out.println("\nA lista está vazia.\nDigite 's' para prosseguir...");
             input.next();
 
         } else {
-            // Verifica se o elemento está no inicio da Lista
             if (current == head) {
                 head = tail = null;
 
             } else {
-                // Remove o objeto Livro que está no final da Lista
                 current.book = null;
-                // cauda-> anterior se torna nova cauda
                 tail = tail.previous;
-                // próximo ponto da cauda para nulo
                 tail.next = null;
-                // Diminui o contador do tamanho da Lista
                 this.sizeList--;
             }
         }
@@ -109,21 +86,18 @@ public class BookList {
     public Book removeBookAtTop() {
         Node current = head;
         Book removedBook = current.book;
-        // Verifica se a lista esá vazia
+
         if (head == null) {
             System.out.println("\nA lista está vazia.\nDigite 's' para prosseguir...");
             input.next();
 
         } else {
-            // Remove o objeto Livro que está no início da Lista
+
             current.book = null;
-            // cabeça-> próxima se torna nova cabeça
             head = head.next;
-            // ponto anterior da cabeça para nulo
             head.previous = null;
-            // Diminui o contador do tamanho da Lista
             this.sizeList--;
-            // }
+
         }
         setListPosition();
         return removedBook;
@@ -283,7 +257,6 @@ public class BookList {
         }
         System.out.println("\nTotal de Livros: " + sizeList);
         while (current != null) {
-            // Imprime cada Livro e segue para o próximo
             System.out.print(current.book + " ");
             current = current.next;
         }

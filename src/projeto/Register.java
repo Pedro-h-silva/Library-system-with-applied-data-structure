@@ -7,59 +7,49 @@ public class Register {
     private static Scanner input = new Scanner(System.in);
 
     public static Book RegisterBook(BookList list) {
-        try {
-            input = new Scanner(System.in);
-            System.out.println("Insira o Título do livro:");
-            String title = input.nextLine();
 
-            System.out.println("\nInsira o isbn do livro:");
-            String isbn = input.nextLine();
+        input = new Scanner(System.in);
+        System.out.println("Insira o Título do livro:");
+        String title = input.nextLine();
 
-            System.out.println("\nInsira a editora do livro:");
-            String editora = input.nextLine();
+        System.out.println("\nInsira o isbn do livro:");
+        String isbn = input.nextLine();
 
-            System.out.println("\nInsira o ano de publicação do livro:");
-            int yearPublication = input.nextInt();
+        System.out.println("\nInsira a editora do livro:");
+        String editora = input.nextLine();
 
-            // Instanciando um novo Livro enviando os atributos através do construtor
-            Book book = new Book(title, isbn, editora, yearPublication);
-            if (list.chekEqualsBooks(book)) {
-                System.out.println("Este livro já existe no cadastro!");
-                input.nextLine();
-                return null;
+        System.out.println("\nInsira o ano de publicação do livro:");
+        int yearPublication = input.nextInt();
 
-            } else {
-                // Chamando o método para registrar o Autor e addicionar ao Livro
-                book.addAuthor(RegisterAuthor(book));
-                // Laço para caso o Livro possua mais de 1 autor, adicionando no seu atributo de
-                // Array de Autores
-                int chose;
-                do {
-                    System.out.println(
-                            "\nDeseja registrar mais um Autor para este Livro?\nDigite 1 para SIM\nDigite 2 para NÃO: ");
-                    chose = input.nextInt();
-                    if (chose == 2)
-                        break;
-                    else if (chose == 1)
-                        book.addAuthor(RegisterAuthor(book));
-                    else {
-                        ShowMenu.invalidOptionMessage();
-                    }
-
-                } while (chose != 2);
-                System.out.println("\nLivro registrado com sucesso!\nDigite 's' para prosseguir...");
-                input.next();
-                return book;
-            }
-
-        } catch (InputMismatchException exc) {
-            input.nextLine();
-            System.out.println("O ano do livro deve ser um número inteiro...");
-            return null;
-
-        } catch (NullPointerException exc) {
+        // Instanciando um novo Livro enviando os atributos através do construtor
+        Book book = new Book(title, isbn, editora, yearPublication);
+        if (list.chekEqualsBooks(book)) {
+            System.out.println("Este livro já existe no cadastro!");
             input.nextLine();
             return null;
+
+        } else {
+            // Chamando o método para registrar o Autor e addicionar ao Livro
+            book.addAuthor(RegisterAuthor(book));
+            // Laço para caso o Livro possua mais de 1 autor, adicionando no seu atributo de
+            // Array de Autores
+            int chose;
+            do {
+                System.out.println(
+                        "\nDeseja registrar mais um Autor para este Livro?\nDigite 1 para SIM\nDigite 2 para NÃO: ");
+                chose = input.nextInt();
+                if (chose == 2)
+                    break;
+                else if (chose == 1)
+                    book.addAuthor(RegisterAuthor(book));
+                else {
+                    ShowMenu.invalidOptionMessage();
+                }
+
+            } while (chose != 2);
+            System.out.println("\nLivro registrado com sucesso!\nDigite 's' para prosseguir...");
+            input.next();
+            return book;
         }
     }
 

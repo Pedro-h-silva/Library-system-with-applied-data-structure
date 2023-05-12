@@ -60,23 +60,11 @@ class Main {
                         ShowMenu.consultBookMenu();
                         switch (option3 = input.nextInt()) {
                             case 1: {
-                                try {
-                                    System.out.println("Digite a posição do livro que deseja consultar:\n");
-                                    System.out.println(bookList.getBook(input.nextInt())
-                                            + "\nDigite 's' para continuar...");
-                                    input.next();
-                                    break;
-
-                                } catch (NullPointerException exc) {
-                                    System.out.println("\nLivro não encontrado tente novamente.");
-                                    break;
-
-                                } catch (InputMismatchException exc) {
-                                    System.out
-                                            .print("\nVocê deve inserir um número inteiro para a posição do livro, tente novamente...");
-                                    input.nextLine();
-                                    break;
-                                }
+                                System.out.println("Digite a posição do livro que deseja consultar:\n");
+                                System.out.println(bookList.getBook(input.nextInt())
+                                        + "\nDigite 's' para continuar...");
+                                input.next();
+                                break;
                             }
                             // consultar titulos por ordem alfabetica
                             case 2:
@@ -92,21 +80,13 @@ class Main {
                             }
                             // consulta por intervalo de ano de publicação
                             case 4: {
-                                try {
-                                    System.out.print("Digite um ano inicial para pesquisa: ");
-                                    int year1 = input.nextInt();
-                                    System.out.print("Digite o ano final: ");
-                                    int year2 = input.nextInt();
+                                System.out.print("Digite um ano inicial para pesquisa: ");
+                                int year1 = input.nextInt();
+                                System.out.print("Digite o ano final: ");
+                                int year2 = input.nextInt();
 
-                                    bookList.getYearTittle(year1, year2);
-                                    break;
-
-                                } catch (InputMismatchException exc) {
-                                    System.out
-                                            .print("Você deve inserir um número inteiro para o ano do livro, tente novamente...");
-                                    input.nextLine();
-                                    break;
-                                }
+                                bookList.getYearTittle(year1, year2);
+                                break;
                             }
                             case 5:
                                 ShowMenu.backMainMenuMessage();
@@ -129,23 +109,17 @@ class Main {
                 }
                 // Opção 4 Fará remoção do último livro da lista
                 case 4: {
-                    try {
-                        System.out.println(
-                                "\nLivro removido do final da Lista:\n" + bookList.removeBookAtEnd()
-                                        + "\nDigite 's' para prosseguir...");
-                        input.next();
-                        break;
-                    } catch (NullPointerException exc) {
-                        System.out.println("Nenhum livro consta no cadastro." +
-                                "\nVoltando ao menu principal...\n");
-                        break;
-                    }
+
+                    System.out.println(
+                            "\nLivro removido do final da Lista:\n" + bookList.removeBookAtEnd()
+                                    + "\nDigite 's' para prosseguir...");
+                    input.next();
+                    break;
+
                 }
-                // Caso a opção seja 5, o programa será encerrado
                 case 5:
                     System.out.println("Encerrando o programa...");
                     break;
-                // Caso seja selecionado qualquer outra tecla, informará para tentar novamente
                 default:
                     ShowMenu.invalidOptionMessage();
                     break;
