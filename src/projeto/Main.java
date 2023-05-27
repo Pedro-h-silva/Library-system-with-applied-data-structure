@@ -1,6 +1,5 @@
 package projeto;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Main {
@@ -23,25 +22,27 @@ class Main {
                         ShowMenu.registerBookMenu();
                         switch (option2 = input.nextInt()) {
                             case 1:
-                                try {
-                                    bookList.addBookAtTop(Register.RegisterBook(bookList));
-                                    break;
+                                // try {
+                                bookList.addBookAtTop(Register.RegisterBook(bookList));
+                                break;
 
-                                } catch (NullPointerException exc) {
-                                    System.out.println("Não foi possível cadastrar o Livro, tente novamente...\n");
-                                    bookList.removeBookAtTop();
-                                    break;
-                                }
+                            // } catch (NullPointerException exc) {
+                            // System.out.println("Não foi possível cadastrar o Livro, tente
+                            // novamente...\n");
+                            // bookList.removeBookAtTop();
+                            // break;
+                            // }
                             case 2:
-                                try {
-                                    bookList.addBookAtEnd(Register.RegisterBook(bookList));
-                                    break;
+                                // try {
+                                bookList.addBookAtEnd(Register.RegisterBook(bookList));
+                                break;
 
-                                } catch (NullPointerException exc) {
-                                    System.out.println("Não foi possível cadastrar o Livro, tente novamente...\n");
-                                    bookList.removeBookAtEnd();
-                                    break;
-                                }
+                            // } catch (NullPointerException exc) {
+                            // System.out.println("Não foi possível cadastrar o Livro, tente
+                            // novamente...\n");
+                            // bookList.removeBookAtEnd();
+                            // break;
+                            // }
 
                             case 3:
                                 ShowMenu.backMainMenuMessage();
@@ -109,13 +110,11 @@ class Main {
                 }
                 // Opção 4 Fará remoção do último livro da lista
                 case 4: {
-
                     System.out.println(
                             "\nLivro removido do final da Lista:\n" + bookList.removeBookAtEnd()
                                     + "\nDigite 's' para prosseguir...");
                     input.next();
                     break;
-
                 }
                 case 5:
                     System.out.println("Encerrando o programa...");
@@ -124,7 +123,6 @@ class Main {
                     ShowMenu.invalidOptionMessage();
                     break;
             }
-
         } while (option != 5);
     }
 }
