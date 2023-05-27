@@ -275,15 +275,4 @@ public class BookList {
         }
         return false;
     }
-
-    /*
-     * public void mergeSortTittles(BookList bookList, int start, int end) {
-     * start = 0;
-     * end = (Integer) null;
-     * 
-     * if (end == null) {
-     * end = ((Collection<Book>) bookList).size();
-     * }
-     * }
-     */
 }
